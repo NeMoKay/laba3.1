@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 
 template <typename T>
@@ -57,11 +58,17 @@ UniquePtr<T>::~UniquePtr(){
 
 template <typename T>
 T& UniquePtr<T>::operator*() const{
+    if (ptr == nullptr){
+        throw std::invalid_argument("Ошибка доступа: нулевой UniquePtr");
+    }
     return *ptr;
 }
 
 template <typename T>
 T* UniquePtr<T>::operator->() const{
+    if (ptr == nullptr){
+        throw std::invalid_argument("Ошибка доступа: нулевой UniquePtr");
+    }
     return ptr;
 }
 
@@ -156,6 +163,9 @@ UniquePtr<T[]>::~UniquePtr(){
 
 template <typename T>
 T& UniquePtr<T[]>::operator[](size_t index) const{
+    if (ptr == nullptr){
+        throw std::invalid_argument("Обращение к пустому массиву UniquePtr");
+    }
     return ptr[index];
 }
 

@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 
 
@@ -124,11 +125,17 @@ SharedPtr<T>::~SharedPtr(){
 
 template <typename T>
 T& SharedPtr<T>::operator*() const{
+    if (ptr == nullptr){
+        throw std::invalid_argument("Ошибка доступа: нулевой SharedPtr");
+    }
     return *ptr;
 }
 
 template <typename T>
 T* SharedPtr<T>::operator->() const{
+    if (ptr == nullptr){
+        throw std::invalid_argument("Ошибка доступа: нулевой SharedPtr");
+    }
     return ptr;
 }
 
@@ -339,6 +346,9 @@ SharedPtr<T[]>::~SharedPtr(){
 
 template <typename T>
 T& SharedPtr<T[]>::operator[](size_t index) const{
+    if (ptr == nullptr){
+        throw std::invalid_argument("Обращение к пустому массиву SharedPtr");
+    }
     return ptr[index];
 }
 
