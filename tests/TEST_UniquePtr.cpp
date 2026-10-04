@@ -1,6 +1,6 @@
 #include "Fixtures.hpp"
 
-TEST_F(UniquePtr_Fixture, DereferenceSinglePointer){
+TEST_F(UniquePtr_Fixture, DereferenceSingle){
     EXPECT_EQ(**valid_ptr, 42);
     if (testing::Test::HasFailure()){
         std::cout << "\n--- Ошибка при разыменовании одиночного UniquePtr ---\n";
@@ -8,7 +8,7 @@ TEST_F(UniquePtr_Fixture, DereferenceSinglePointer){
     }
 }
 
-TEST_F(UniquePtr_Fixture, DereferenceArrayPointer){
+TEST_F(UniquePtr_Fixture, DereferenceArray){
     EXPECT_EQ((*arr_ptr)[1], 20);
     if (testing::Test::HasFailure()){
         std::cout << "\n--- Ошибка при разыменовании массива UniquePtr ---\n";
@@ -16,7 +16,7 @@ TEST_F(UniquePtr_Fixture, DereferenceArrayPointer){
     }
 }
 
-TEST_F(UniquePtr_Fixture, ThrowsOnEmptyDereference){
+TEST_F(UniquePtr_Fixture, ThrowsOnEmpty){
     EXPECT_THROW(**empty_ptr, std::invalid_argument);
     if (testing::Test::HasFailure()){
         std::cout << "\n--- Ошибка проверки исключений ---\n";
@@ -33,7 +33,7 @@ TEST_F(UniquePtr_Fixture, MoveTransfersValue){
     }
 }
 
-TEST_F(UniquePtr_Fixture, MoveClearsDonorPointer){
+TEST_F(UniquePtr_Fixture, MoveClearsDonor){
     UniquePtr<int> moved_ptr = std::move(*valid_ptr); 
     EXPECT_EQ(static_cast<bool>(*valid_ptr), false);
     if (testing::Test::HasFailure()){

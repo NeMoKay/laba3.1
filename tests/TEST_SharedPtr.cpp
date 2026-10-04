@@ -1,6 +1,6 @@
 #include "Fixtures.hpp"
 
-TEST_F(SharedPtr_Fixture, CopyConstructorPreservesValue){
+TEST_F(SharedPtr_Fixture, CopyPreservesValue){
     SharedPtr<int> copy_ptr = *valid_ptr;
     EXPECT_EQ(*copy_ptr, 99);
     if (testing::Test::HasFailure()){
@@ -9,7 +9,7 @@ TEST_F(SharedPtr_Fixture, CopyConstructorPreservesValue){
     }
 }
 
-TEST_F(SharedPtr_Fixture, CopyMaintainsDonorValidity){
+TEST_F(SharedPtr_Fixture, CopyMaintainsDonor){
     SharedPtr<int> copy_ptr = *valid_ptr;
     EXPECT_EQ(static_cast<bool>(*valid_ptr), true); 
     if (testing::Test::HasFailure()){
@@ -18,7 +18,7 @@ TEST_F(SharedPtr_Fixture, CopyMaintainsDonorValidity){
     }
 }
 
-TEST_F(SharedPtr_Fixture, SharedMemoryIsMutable){
+TEST_F(SharedPtr_Fixture, MemoryIsMutable){
     SharedPtr<int> copy_ptr = *valid_ptr;
     *copy_ptr = 100;
     EXPECT_EQ(**valid_ptr, 100); 
@@ -28,7 +28,7 @@ TEST_F(SharedPtr_Fixture, SharedMemoryIsMutable){
     }
 }
 
-TEST_F(SharedPtr_Fixture, ThrowsOnEmptyDereference){
+TEST_F(SharedPtr_Fixture, ThrowsOnEmpty){
     EXPECT_THROW(**empty_ptr, std::invalid_argument);
     if (testing::Test::HasFailure()){
         std::cout << "\n--- Ошибка проверки исключений SharedPtr ---\n";

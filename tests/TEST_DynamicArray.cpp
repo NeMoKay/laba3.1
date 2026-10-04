@@ -8,7 +8,7 @@ TEST_F(DynamicArray_Fixture, SizeIsCorrect){
     }
 }
 
-TEST_F(DynamicArray_Fixture, GetReturnsCorrectElements){
+TEST_F(DynamicArray_Fixture, GetReturnsCorrect){
     EXPECT_EQ(valid_arr->Get(0), 1);
     EXPECT_EQ(valid_arr->Get(4), 5);
     if (testing::Test::HasFailure()){
@@ -17,7 +17,7 @@ TEST_F(DynamicArray_Fixture, GetReturnsCorrectElements){
     }
 }
 
-TEST_F(DynamicArray_Fixture, OperatorBracketsReturnsCorrectElement){
+TEST_F(DynamicArray_Fixture, OperatorBrackets){
     EXPECT_EQ((*valid_arr)[2], 3); 
     if (testing::Test::HasFailure()){
         std::cout << "\n--- Ошибка DynamicArray (Оператор []) ---\n";
@@ -25,7 +25,7 @@ TEST_F(DynamicArray_Fixture, OperatorBracketsReturnsCorrectElement){
     }
 }
 
-TEST_F(DynamicArray_Fixture, ThrowsOnEmptyArrayAccess){
+TEST_F(DynamicArray_Fixture, ThrowsOnEmptyAccess){
     EXPECT_THROW(empty_arr->Get(0), std::out_of_range);
     if (testing::Test::HasFailure()){
         std::cout << "\n--- Ошибка DynamicArray (Исключения) ---\n";
@@ -33,7 +33,7 @@ TEST_F(DynamicArray_Fixture, ThrowsOnEmptyArrayAccess){
     }
 }
 
-TEST_F(DynamicArray_Fixture, ThrowsOnIndexOutOfBoundsRead){
+TEST_F(DynamicArray_Fixture, ThrowsOnOutOfBoundsRead){
     EXPECT_THROW(valid_arr->Get(10), std::out_of_range);
     if (testing::Test::HasFailure()){
         std::cout << "\n--- Ошибка DynamicArray (Исключения чтения) ---\n";
@@ -41,7 +41,7 @@ TEST_F(DynamicArray_Fixture, ThrowsOnIndexOutOfBoundsRead){
     }
 }
 
-TEST_F(DynamicArray_Fixture, ThrowsOnIndexOutOfBoundsWrite){
+TEST_F(DynamicArray_Fixture, ThrowsOnOutOfBoundsWrite){
     EXPECT_THROW(valid_arr->Set(5, 10), std::out_of_range);
     if (testing::Test::HasFailure()){
         std::cout << "\n--- Ошибка DynamicArray (Исключения записи) ---\n";
@@ -49,7 +49,7 @@ TEST_F(DynamicArray_Fixture, ThrowsOnIndexOutOfBoundsWrite){
     }
 }
 
-TEST_F(DynamicArray_Fixture, DeepCopyCreatesIndependentArray){
+TEST_F(DynamicArray_Fixture, DeepCopyIsIndependent){
     DynamicArray<int> copy_arr(*valid_arr);
     copy_arr.Set(0, 999);
     EXPECT_EQ(valid_arr->Get(0), 1);

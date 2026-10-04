@@ -11,19 +11,19 @@ const size_t LOAD_SIZE = 1000000;
 
 TEST(LoadTest, CompareArrays){
     auto start_custom = std::chrono::high_resolution_clock::now();
-    DynamicArray<int> custom_array;
-    custom_array.Resize(LOAD_SIZE);
+    DynamicArray<int> custom_arr;
+    custom_arr.Resize(LOAD_SIZE);
     for (size_t index = 0; index < LOAD_SIZE; index++){
-        custom_array.Set(index, index);
+        custom_arr.Set(index, index);
     }
     auto end_custom = std::chrono::high_resolution_clock::now();
     double time_custom = std::chrono::duration<double, std::milli>(end_custom - start_custom).count();
 
     auto start_standard = std::chrono::high_resolution_clock::now();
-    std::vector<int> standard_array;
-    standard_array.resize(LOAD_SIZE);
+    std::vector<int> std_arr;
+    std_arr.resize(LOAD_SIZE);
     for (size_t index = 0; index < LOAD_SIZE; index++){
-        standard_array[index] = index;
+        std_arr[index] = index;
     }
     auto end_standard = std::chrono::high_resolution_clock::now();
     double time_standard = std::chrono::duration<double, std::milli>(end_standard - start_standard).count();
@@ -45,11 +45,11 @@ TEST(LoadTest, CompareUniquePtr){
 
 
     auto start_standard = std::chrono::high_resolution_clock::now();
-    std::unique_ptr<int[]> standard_unique(new int[LOAD_SIZE]);
+    std::unique_ptr<int[]> std_unique(new int[LOAD_SIZE]);
     for (size_t index = 0; index < LOAD_SIZE; index++){
-        standard_unique[index] = index;
+        std_unique[index] = index;
     }
-    std::unique_ptr<int[]> moved_standard = std::move(standard_unique);
+    std::unique_ptr<int[]> moved_standard = std::move(std_unique);
     auto end_standard = std::chrono::high_resolution_clock::now();
     double time_standard = std::chrono::duration<double, std::milli>(end_standard - start_standard).count();
 
@@ -67,10 +67,10 @@ TEST(LoadTest, CompareSharedPtr){
     auto end_custom = std::chrono::high_resolution_clock::now();
     double time_custom = std::chrono::duration<double, std::milli>(end_custom - start_custom).count();
 
-    std::shared_ptr<int> standard_shared = std::make_shared<int>(100);
+    std::shared_ptr<int> std_shared = std::make_shared<int>(100);
     auto start_standard = std::chrono::high_resolution_clock::now();
     for (size_t index = 0; index < LOAD_SIZE; index++){
-        std::shared_ptr<int> copy_standard = standard_shared;
+        std::shared_ptr<int> copy_standard = std_shared;
     }
     auto end_standard = std::chrono::high_resolution_clock::now();
     double time_standard = std::chrono::duration<double, std::milli>(end_standard - start_standard).count();
