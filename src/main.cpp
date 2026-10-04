@@ -11,7 +11,7 @@ void createAndDestroyArray(){
         cout << arr[i] << " ";
     }
     cout << endl;
-}
+} 
 
 int main(){
     createAndDestroyArray();
